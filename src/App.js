@@ -1,12 +1,13 @@
 import './App.css';
 // import {hot} from "react-hot-loader";
-import {Home} from "./pages/index.jsx"
+//import {Home} from "./pages/index.jsx"
+import RenderRoutes from './routes/index.jsx';
 
 function App() {
   return (
-    <div className="App-header">
-          <Home/>
-    </div>
+    
+    <RenderRoutes/>
+  
   );
 }
 

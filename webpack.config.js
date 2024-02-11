@@ -15,7 +15,7 @@ module.exports = (_,param) => {
                 chunkFilename: "[id].js",
                 publicPath: "/",
                 path: path.resolve(__dirname, "build"),
-                filename: "bundle.js"
+                filename: "[name].bundle.js"
             },
             module: {
                 rules: [
@@ -45,7 +45,16 @@ module.exports = (_,param) => {
             optimization: {
                 minimize: param.env.TARGET_ENV === "production",
                 minimizer: [new TerserWebpackPlugin({ test: /\.js(\?.*)?$/i })],
-              },
+                splitChunks: {
+                    chunks: 'all',
+                    cacheGroups: {
+                      vendor: {
+                        test: /[\\/]node_modules[\\/]/,
+                        name: 'vendors',
+                      },
+                    },
+                  },
+            },
             performance: {
                 hints: param.env.TARGET_ENV === "production" ? "warning" : false,
                 maxAssetSize: 2048000,
